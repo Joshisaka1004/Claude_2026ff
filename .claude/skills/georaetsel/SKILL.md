@@ -1,11 +1,11 @@
 ---
 name: georaetsel
-description: "Use when Jochen types /georaetsel or asks for classic geometry puzzle cards (klassische Georätsel): one clean figure, a title question like „Grün = ?“, „Gelb : Rot = ?“ or „r : R = ?“, markings instead of text, a hidden aha. First asks interactively for number, difficulty, languages and which models do idea-finding and checking; then creates new, not widely known puzzles as PNG cards (puzzle + solution) with verified solutions and an iPad gallery."
+description: "Use when Jochen types /georaetsel or asks for classic geometry puzzle cards (klassische Georätsel): one clean figure, a title question like „Grün = ?“, „Gelb : Rot = ?“ or „r : R = ?“, markings instead of text, a hidden aha. First asks interactively for number, difficulty, languages and which models do idea-finding and checking; then invents genuinely original puzzles (new figure combinations + computer search for invariants, strict double novelty check) as colourful PNG cards (puzzle + solution) with verified solutions and an iPad gallery."
 ---
 
 # /georaetsel – klassische Georätsel
 
-Ziel: neue, eigene Geometrie-Rätselkarten im **klassischen Stil** – so wie die Vorlagen in `referenz/`: eine saubere Figur, eine kurze Frage als Titel, fast kein Text, ein echter Aha-Moment. Die Rätsel sollen **nicht schon hundertfach bekannt** sein. Jede Karte als PNG für Aufgabe und Lösung, fertig geprüft, mit Lösungsblatt und Galerie für das iPad.
+Ziel: neue, eigene Geometrie-Rätselkarten im **klassischen Stil** – so wie die Vorlagen in `referenz/`: eine saubere Figur, eine kurze Frage als Titel, fast kein Text, ein echter Aha-Moment. Die Rätsel müssen **originell** sein – nicht schon hundertfach bekannt. Das ist die wichtigste Anforderung (Abschnitt 2). Jede Karte als PNG für Aufgabe und Lösung, fertig geprüft, mit Lösungsblatt und Galerie für das iPad.
 
 Unterschied zu /ahaaufgaben: Dort sind auch Alltag, 3D, Längen-Geschichten erlaubt. Hier **nur ebene Geometrie, keine Einkleidung, kein Fließtext**. Die Figur trägt die ganze Aufgabe.
 
@@ -17,17 +17,17 @@ Mit dem Tool `AskUserQuestion` **in einem einzigen Aufruf** diese vier Fragen st
 2. **Schwierigkeit** (Kopf „Stufe“, Mehrfachauswahl): „leicht“, „mittel“, „schwer“, „sehr schwer“. Die Karten werden gleichmäßig auf die gewählten Stufen verteilt.
 3. **Sprachen** (Kopf „Sprachen“): „Deutsch + Englisch (Empfohlen)“, „nur Deutsch“, „nur Englisch“.
 4. **Modelle** (Kopf „Modelle“): wer welche Rolle übernimmt (Rollen siehe unten):
-   - „Gemischt (Empfohlen)“: Ideen von dieser Sitzung plus zweite Ideenliste von Opus; Bekanntheitsprüfung und Kaltlösen Opus; Kaltlesen Sonnet.
+   - „Gemischt (Empfohlen)“: Ideengeber Opus; Bekanntheitsprüfer 1 Opus, Bekanntheitsprüfer 2 Fable; Kaltlösen Opus; Kaltlesen Sonnet.
    - „Alles Opus“: alle Helfer-Rollen mit Opus.
-   - „Schnell (Sonnet)“: alle Helfer-Rollen mit Sonnet – schneller, etwas weniger gründlich.
-   - „Mit Fable“: zweite Ideenliste von Fable, Prüfer Opus.
+   - „Schnell (Sonnet)“: alle Helfer-Rollen mit Sonnet, Bekanntheitsprüfer 2 Opus – schneller, etwas weniger gründlich.
+   - „Mit Fable“: Ideengeber Fable, Bekanntheitsprüfer Opus und Sonnet, Kaltlösen Opus, Kaltlesen Sonnet.
    Über „Other“ kann Jochen jede Rolle einzeln festlegen (z. B. „Ideen Fable, Kaltlösen Opus, Kaltlesen Haiku“).
 
 Abkürzung: Stehen die Antworten schon hinter dem Befehl (z. B. `/georaetsel 8 mittel,schwer de+en opus`), nur noch nach dem Fehlenden fragen. Erkennbare Wörter: Zahl; leicht/mittel/schwer/sehr schwer; de, en, de+en; gemischt, opus, sonnet, fable.
 
 **Rollen und Modelle.** Diese Sitzung selbst rechnet, zeichnet und entscheidet; ihr eigenes Modell kann der Befehl nicht wechseln (dafür vor dem Start `/model`). Die Helfer-Rollen laufen als frische Subagenten (Agent-Tool, `subagent_type: general-purpose`) mit dem gewählten Modell im Parameter `model` (`opus`, `sonnet`, `haiku`, `fable`):
 - **Ideengeber** – liefert eine zweite, unabhängige Ideenliste (siehe 3.2).
-- **Bekanntheitsprüfer** – sagt, welche Ideen schon bekannt sind (siehe 3.3).
+- **Bekanntheitsprüfer 1 und 2** – zwei unabhängige Prüfer mit verschiedenen Modellen sagen, welche Ideen schon bekannt sind (siehe 3.3). Verschiedene Modelle kennen verschiedene Sammlungen.
 - **Kaltlöser** – löst die fertigen Karten nur aus dem Bild (siehe 3.6).
 - **Kaltleser** – liest Text und Skizze Korrektur (siehe 3.6).
 Die gewählte Belegung kommt ins Lösungsblatt.
@@ -54,11 +54,29 @@ Vorher die Vorlagen in `referenz/` ansehen und `referenz/stil.md` lesen. Die Vor
 5. **Wenige Angaben:** meist 1–4 Zahlen, klein und glatt. Das Ergebnis ist glatt: ganze Zahl, einfacher Bruch, einfaches Verhältnis, einfache Wurzel, Vielfaches von π, Grad.
 6. **Aha statt Rechnen.** Mit dem Trick ist die Lösung 3–5 Zeilen lang. Ohne Trick bleibt nur mühsames Koordinaten-Rechnen. Ein Gleichungssystem ist nie der Kern.
 7. **Maßstabsgetreu.** Jede Karte zeigt eine echte Lösung der Aufgabe, aus der Rechnung konstruiert. Eine Fläche „10“ sieht größer aus als eine Fläche „4“. Gesuchte Längen, die man abmessen könnte, nicht mit Maßlinie zeigen.
-8. **Ruhig und klar:** dicke schwarze Konturen, wenige kräftige Farben, viel Weiß. Kein Lösungsweg, keine Hilfslinie, die nicht zur Aufgabe gehört.
+8. **Klar und farbenfroh:** kräftige dunkle Konturen, 2–4 frische, harmonische Füllfarben auf weißer Tafel (siehe 3.5). Kein Lösungsweg, keine Hilfslinie, die nicht zur Aufgabe gehört.
 
-## 2. Nicht schon 100× bekannt
+## 2. Originalität (wichtigste Regel)
 
-Jedes Geometrie-Rätsel beruht auf bekannten Sätzen – das ist in Ordnung. Aber die **konkrete Figur mit ihrer Frage** darf kein Standardrätsel sein, das man in Schulbüchern, Wettbewerben oder Social-Media-Sammlungen ständig sieht.
+Jedes Geometrie-Rätsel beruht auf bekannten Sätzen – das ist in Ordnung. Aber die **konkrete Figur mit ihrer Frage** darf kein Standardrätsel sein, das man in Schulbüchern, Wettbewerben, Rätselbüchern oder Social-Media-Sammlungen (Catriona Agg, MindYourDecisions, Ed Southall, Igor-Tigerrr-/GeoRätsel-Accounts, AoPS, gogeometry) sieht. Auch ein bekanntes Lemma in neuer Verkleidung ist **nicht** originell.
+
+**Warum Ideen nicht aus dem Gedächtnis kommen dürfen:** Was einem Sprachmodell „einfällt“, ist fast immer etwas, das es schon gesehen hat – also ein bekanntes Rätsel. Serie 001 und 002 haben das gezeigt. Darum entstehen Ideen hier **durch Konstruktion und Suche**, nicht durch Erinnern.
+
+### 2.1 Pflichtweg: Figur würfeln, Invariante suchen
+1. **Figur würfeln:** eine Grundform und zwei bis drei Konstruktionen aus den Listen unten kombinieren, mit mindestens einem frei beweglichen Punkt oder einer freien Größe. Ungewöhnliche Paarungen bevorzugen (z. B. Fünfeck + Quadrat über einer Diagonale + Kreis durch drei Punkte).
+   - Grundformen: Quadrat, Rechteck 1 : 2, Rechteck 2 : 3, gleichseitiges Dreieck, rechtwinkliges 3-4-5-Dreieck, rechtwinklig-gleichschenkliges Dreieck, regelmäßiges Fünf-, Sechs-, Acht-, Zwölfeck, Raute mit 60°, Kreis, Halbkreis, Viertelkreis, zwei sich berührende Kreise, Kreis im Quadrat.
+   - Konstruktionen: Punkt frei auf einer Seite oder einem Bogen · Quadrat oder gleichseitiges Dreieck über einer Strecke (innen/außen) · Lot oder Parallele durch einen Punkt · Mittelpunkt, Drittelpunkt einer Strecke · Spiegeln oder Drehen um 60°/90° · Kreis durch drei Punkte · Kreis, der zwei Linien oder einen Kreis berührt · Tangente von einem Punkt · Schnittpunkt zweier Verbindungslinien · Halbkreis über einer Strecke · Viertelkreis um eine Ecke.
+2. **Suchen:** die Figur als `bau(rng)` in Python schreiben (alle Punkte aus den freien Größen berechnet, fester Rahmen) und `scripts/invarianten.py` laufen lassen (`suche(bau, bezug=..., starr=...)`). Es meldet Flächen, Flächenverhältnisse, Längen und Winkel, die trotz Bewegung konstant und glatt sind.
+3. **Fund prüfen:** Gibt es einen kurzen, schönen Grund (3–6 Zeilen)? Ist die Invariante überraschend (nicht nur „gleiche Grundseite, gleiche Höhe“ in offensichtlicher Form)? Nur dann daraus ein Rätsel machen: Die freie Größe bleibt frei (oder wird durch eine Zahl festgelegt), gefragt wird die Invariante.
+4. Mindestens **¾ der Karten** einer Serie stammen aus diesem Weg. Ideen aus dem Gedächtnis (auch vom Ideengeber) nur für den Rest – und nur, wenn sie die strenge Prüfung 3.3 bestehen. Für 8 Karten etwa 30–40 Figuren würfeln und durchsuchen.
+
+### 2.2 Annahme-Regel (streng)
+Eine Idee kommt nur in die Serie, wenn **alle** Punkte erfüllt sind:
+- Beide Bekanntheitsprüfer bewerten sie mit **(c) unbekannt** – oder einer mit (c) und der andere mit (b) „Verwandtes bekannt, aber neuer Gedanke nötig: ja“.
+- Zwei Websuchen (englisch und deutsch, Kernfigur beschrieben) finden diese Figur mit dieser Frage nicht.
+- Der Kaltlöser (3.6) hält die Karte **nicht** für bekannt.
+- Originalitätsnote (1 = Lehrbuch, 5 = nie gesehen) von beiden Prüfern im Schnitt mindestens 4.
+Scheitert eine Karte an einem Punkt, wird sie ersetzt – nie mit dem Hinweis „eher bekannt“ ausgeliefert. Reichen die originellen Ideen nicht für die gewünschte Anzahl, lieber weniger Karten liefern und das offen sagen, statt mit Bekanntem aufzufüllen.
 
 **Sperrliste** – diese Konstellationen nie als Kern verwenden (auch nicht mit anderen Zahlen oder gespiegelt):
 - Ecke eines Quadrats im Mittelpunkt eines anderen (Überlappung = ¼)
@@ -87,14 +105,19 @@ Jedes Geometrie-Rätsel beruht auf bekannten Sätzen – das ist in Ordnung. Abe
 - „Pizza“ im gleichseitigen Dreieck (Punkt mit Loten und Ecken verbunden, abwechselnde Teile gleich)
 - Viertelkreis im Quadrat mit Tangente (Umfang des Eckdreiecks = 2s)
 - gleichschenkliges Tangententrapez (h = √(ab))
+- zwei Quadrate mit Diagonalen und Winkelhalbierender, Dreieck : Gesamtfläche (referenz/beispiel-13)
+- gleichseitiges Dreieck mit AE = Seite und BD = BE, Winkel α (beispiel-14)
+- zwei sich berührende Kreise, Gerade schneidet drei gleiche Stücke x ab (beispiel-15)
+- Quadrat und Kreis auf einer Geraden, Abstand x (beispiel-16)
+- Quadrat mit vier Viertelkreisen und Quadrat in der Mitte (beispiel-19)
+- Rechteck mit Inkreis-Paaren der Teildreiecke (r1² + r2² = r²), Tangententrapez mit r² = Produkt der Schenkelstücke, gestapelte Inkreise im Trapez, Kreis durch die Berührpunkte dreier Kreise, Quadrat mit Lot auf DP (AF · DP = s²) – Serie 002
 - alle Motive aus `referenz/` und aus früheren Serien (siehe 3.1)
 Die Liste nach jeder Serie um neu entdeckte Standardmotive ergänzen.
 
-**So entstehen frische Rätsel:**
+**Zusätzliche Wege zu frischen Rätseln** (immer zusammen mit 2.1):
 - **Zwei Ahas verketten:** Das Ergebnis des ersten Tricks ist die Zutat des zweiten (z. B. eine Flächengleichheit liefert ein Verhältnis, das dann in einem Kreis weiterwirkt).
 - **Ungewohnte Formen kombinieren:** regelmäßiges Fünf-, Zehn- oder Zwölfeck, zwei verschiedene regelmäßige Vielecke an einer gemeinsamen Seite, Viertelkreise in Rechtecken, drei Quadrate in einer Reihe mit einem Kreis, Kreisbögen statt Strecken.
 - **Den Klassiker umdrehen:** Was dort gegeben ist, wird gesucht, und umgekehrt – aber nur, wenn dadurch wirklich ein neuer Gedanke nötig wird.
-- **Eine überraschende Unabhängigkeit suchen:** Python-Experimente mit zufälligen Figuren: Welche Größe bleibt konstant, obwohl sich alles bewegt? Solche Funde sind die besten Rätsel.
 - **Ungewohnte Frageart:** Verhältnis statt Fläche, Winkel in einer Flächenfigur, Länge aus Flächen.
 Pro Idee in der Tabelle eine Spalte **„Was ist neu?“**: ein Satz, was diese Figur von der bekanntesten verwandten Aufgabe unterscheidet. Wer diesen Satz nicht schreiben kann, hat keine neue Idee.
 
@@ -123,17 +146,16 @@ Pro Idee in der Tabelle eine Spalte **„Was ist neu?“**: ein Satz, was diese 
 - Den Skill `raetselgrafik-pruefung` laden und befolgen. Wo er Text verlangt, gilt hier zuerst: **eine Marke in der Figur statt eines Satzes**. Nur was sich nicht zeichnen lässt, kommt als eine kurze Zeile dazu.
 
 ### 3.2 Ideen
-- Etwa doppelt so viele Ideen sammeln wie Karten gewünscht – die Bekanntheitsprüfung siebt aus.
-- Eigene Ideen dieser Sitzung **plus** eine unabhängige Liste vom **Ideengeber** (gewähltes Modell). Auftrag an ihn: Stilregeln aus Abschnitt 1, Sperrliste aus Abschnitt 2, die Liste schon benutzter Motive, gewünschte Stufen; er soll ebenfalls doppelt so viele Ideen liefern, jede mit Figur, Gegeben, Gesucht, Aha, vermuteter Lösung und „Was ist neu?“. Seine Ideen werden hier nachgerechnet wie die eigenen, nie ungeprüft übernommen.
+- Etwa dreimal so viele Kandidaten sammeln wie Karten gewünscht – die Prüfung siebt streng aus.
+- Hauptquelle ist die Invariantensuche aus 2.1 (diese Sitzung würfelt und sucht). Der **Ideengeber** (gewähltes Modell) arbeitet genauso: Er bekommt die Grundformen- und Konstruktionslisten, `scripts/invarianten.py` (Pfad angeben), die Stilregeln, die Sperrliste, die benutzten Motive und die Stufen und soll seine Ideen **durch Würfeln und Suchen** finden, nicht aus dem Gedächtnis. Jede Idee mit Figur, Gegeben, Gesucht, Aha, Lösung, „Was ist neu?“ und dem `bau`-Code. Seine Ideen werden hier nachgerechnet, nie ungeprüft übernommen.
 - Eine Tabelle: Nr. · Figur · Gegeben · Gesucht · Aha · Lösung · Stufe · Was ist neu?
 - Stufen nach Jochens Auswahl gleichmäßig verteilen. „Sehr schwer“ heißt: zwei Ahas hintereinander oder ein gut versteckter Trick; trotzdem glattes Ergebnis.
 - Fragearten gemischt: Fläche, Verhältnis, Winkel, Länge, höchstens ein Beweis pro Serie. Jede Karte ein eigener Aha-Typ.
 
 ### 3.3 Bekanntheitsprüfung (Pflicht, vor dem Zeichnen)
-1. **Bekanntheitsprüfer** (frischer Subagent, gewähltes Modell) bekommt nur die Ideen als kurze Beschreibung – ohne Lösungen. Auftrag: „Bewerte jede Idee: (a) Standardrätsel, kenne ich in genau dieser Form; (b) nahe Verwandte bekannt – nenne die bekannte Aufgabe und was hier anders ist; (c) mir unbekannt. Sei streng: Lieber einmal zu oft ‚bekannt‘ sagen.“
-2. Falls die Websuche verfügbar ist: für jede Idee mit (b) oder (c) eine kurze Suche nach der Kernfigur (z. B. „square inscribed quarter circle area puzzle“). Taucht die Figur mit derselben Frage als bekanntes Rätsel auf → wie (a) behandeln.
-3. (a) verwerfen. (b) nur behalten, wenn der Unterschied einen neuen Gedanken verlangt – sonst abwandeln und erneut prüfen. Aus den übrigen die gewünschte Anzahl auswählen, Stufen und Aha-Typen gut gemischt.
-4. Im Lösungsblatt pro Karte die Einstufung (b/c) und den Satz „Was ist neu?“ festhalten.
+1. **Zwei Bekanntheitsprüfer** (frische Subagenten, zwei verschiedene Modelle, parallel) bekommen nur die Ideen als kurze Beschreibung – ohne Lösungen. Auftrag: „Bewerte jede Idee: (a) Standardrätsel, kenne ich in genau dieser Form; (b) nahe Verwandte bekannt – nenne die bekannte Aufgabe und ob hier wirklich ein neuer Gedanke nötig ist; (c) mir unbekannt. Gib zusätzlich eine Originalitätsnote 1–5 (1 = Lehrbuch, 5 = nie gesehen). Ein bekanntes Lemma in neuer Verkleidung ist (a). Sei streng: lieber einmal zu oft ‚bekannt‘. Nutze die Websuche (per ToolSearch „select:WebSearch“ laden) für jede Idee, die du nicht mit (a) bewertest: eine englische und eine deutsche Suche nach der Kernfigur.“
+2. Die Annahme-Regel aus 2.2 anwenden. Abgelehnte Ideen ersetzen: neu würfeln und suchen, dann erneut prüfen lassen.
+3. Im Lösungsblatt pro Karte: Herkunft (Invariantensuche / Ideengeber), beide Einstufungen, beide Noten, „Was ist neu?“.
 
 ### 3.4 Rechnen und Bestimmtheit (Pflicht, Python)
 Für jede Karte ein kleines Skript `nr-XX.py` (wird mit ausgeliefert):
@@ -145,8 +167,11 @@ Für jede Karte ein kleines Skript `nr-XX.py` (wird mit ausgeliefert):
 
 ### 3.5 Zeichnen
 - Baukasten benutzen: `scripts/karte.py` (Karte, Flächen, Kreise, Strichmarken, Parallelpfeile, rechte Winkel, Winkelbögen, Punkte, Maßlinien, Kontaktbogen). Bei Bedarf `pip install matplotlib shapely scipy pillow`.
-- Format 1100 × 1100 px, weißer Grund, Schrift Inter. Titel fett oben, ggf. eine Zeile darunter, Figur in der Mitte, Stichwort kursiv darunter, Datum + #Nr senkrecht links, Signatur unten: `#GeoRätsel` (DE) bzw. `#GeoPuzzle` (EN). Nie den Namen eines fremden Autors.
-- Farben aus dem Baukasten: `GRUEN` für das Gesuchte, `HELLBLAU`, `GELB`, `ROT`, `GOLD`, `ORANGE`, `VIOLETT` für gegebene oder verglichene Flächen. Höchstens drei Füllfarben pro Karte.
+- **Stil „bunt“** (Baukasten-Standard): 1100 × 1100 px, zarter Pastell-Grund (wechselt automatisch mit der Nummer, oder `hintergrund=`), die Figur auf einer weißen, abgerundeten Tafel mit weichem Schatten. Schrift Inter. Titel fett auf dem farbigen Grund, ggf. eine Zeile darunter, Stichwort kursiv unten auf der Tafel, Datum + #Nr senkrecht links und Signatur unten in der Akzentfarbe: `#GeoRätsel` (DE) bzw. `#GeoPuzzle` (EN). Nie den Namen eines fremden Autors.
+- Farbenfroh, aber harmonisch: 2–4 Füllfarben pro Karte aus dem Baukasten – `GRUEN` für das Gesuchte, dazu `HELLBLAU`, `GELB`, `GOLD`, `ROT`, `KORALLE`, `ORANGE`, `VIOLETT`, `TUERKIS`. Benachbarte Flächen in deutlich verschiedenen Farben; Weiß als ruhige Fläche dazwischen ist erlaubt.
+- Farbwörter im Titel in der passenden `_TXT`-Farbe (z. B. `GOLD_TXT`, `VIOLETT_TXT`); Zahlen in Flächen in Tinte oder im dunklen Ton ihrer Fläche.
+- Gegebene Längen: Maßlinie und Zahl in `MASS` (korallenrot, Standard); eine gesuchte Länge (x) in `GESUCHT` (blau) – wie in den Vorlagen 16 und 19.
+- Vorher die farbigen Vorlagen in `referenz/` ansehen (beispiel-13 bis -19) und die Karten mindestens so ansprechend gestalten.
 - Marken (Striche, Pfeile, Winkel) erst nach den Umrissen zeichnen – ihre Größe richtet sich nach der Figur.
 - Zahlen mittig in ihre Fläche, nie auf eine Linie; gesuchte Fläche mit „?“ in `GRUEN_TXT`.
 - Zu jeder Aufgabe eine **Lösungskarte** (`Loesungskarte` im Baukasten): Antwort als Titel, dieselbe Figur mit gestrichelten Hilfslinien und Farben, die den Trick zeigen, darunter der Lösungsweg in 3–5 kurzen Sätzen (Trick zuerst).
@@ -156,7 +181,7 @@ Für jede Karte ein kleines Skript `nr-XX.py` (wird mit ausgeliefert):
 ### 3.6 Prüfen (Pflicht)
 Kaltleser und Kaltlöser laufen mit den in Abschnitt 0 gewählten Modellen, parallel im Hintergrund. Beide bekommen nur die Pfade der Aufgaben-PNGs und die Zeichensprache aus Abschnitt 1, ausdrücklich keine Lösungskarten, Skripte oder `loesungen.md`.
 1. **Kaltlesen** wie in `raetselgrafik-pruefung` (frischer Subagent, alle Aufgaben-PNGs in allen gewählten Sprachen, keine Lösungen). Zusätzlich fragen: „Gibt es Text, den die Skizze schon zeigt oder der durch eine Marke ersetzbar wäre?“
-2. **Kaltlösen:** Ein zweiter frischer Subagent bekommt nur die Aufgaben-PNGs einer Sprache und löst jede Karte: Antwort plus Lösungsidee in 2–3 Sätzen, und welche Annahmen er treffen musste. Abweichung von der eigenen Lösung → klären: Ist die Figur mehrdeutig (Punkt auf Seite oder in Ecke? Berührung oder Schnitt? parallel oder nicht?), fehlt eine Marke, oder irrt der Agent? Musste er etwas annehmen, das nicht markiert ist → Marke ergänzen. Fand er eine Karte sofort „aus dem Lehrbuch bekannt“ → zurück zu 3.3.
+2. **Kaltlösen:** Ein zweiter frischer Subagent bekommt nur die Aufgaben-PNGs einer Sprache und löst jede Karte: Antwort plus Lösungsidee in 2–3 Sätzen, und welche Annahmen er treffen musste. Abweichung von der eigenen Lösung → klären: Ist die Figur mehrdeutig (Punkt auf Seite oder in Ecke? Berührung oder Schnitt? parallel oder nicht?), fehlt eine Marke, oder irrt der Agent? Musste er etwas annehmen, das nicht markiert ist → Marke ergänzen. Den Kaltlöser ausdrücklich fragen: „Kommt dir die Aufgabe bekannt vor (Standardrätsel, bekanntes Lemma)?“ Sagt er ja oder „eher bekannt“, wird die Karte **ersetzt** (zurück zu 2.1) – das ist Pflicht, nicht nur ein Hinweis im Lösungsblatt.
 3. Korrigieren, neu rendern, ansehen; zweiter Durchgang nur für Befunde hoch/mittel.
 
 ### 3.7 Ausliefern

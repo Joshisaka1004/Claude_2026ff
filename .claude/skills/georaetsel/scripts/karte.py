@@ -41,21 +41,53 @@ for _n in ("Inter-Regular", "Inter-Bold", "Inter-Italic", "Inter-SemiBold", "Int
 plt.rcParams["font.family"] = "Inter"
 plt.rcParams["hatch.linewidth"] = 2.4   # kräftige, gut sichtbare Schraffur
 
-# ---------------------------------------------------------------- Farben
-TINTE = "#111111"        # Konturen, Zahlen
-GRAU = "#555555"         # Unterzeile, Stichwort
-GRUEN = "#7DDA8A"        # gesuchte Fläche (Füllung)
-GRUEN_TXT = "#2E7D3A"    # „?“ und Wort „Grün“ im Titel
-GELB = "#FDE28A"
-HELLGELB = "#FFF5CC"
-HELLBLAU = "#C5DFFC"
-ROT = "#FF7B7B"
-ROT_TXT = "#E04848"
-GOLD = "#FBC61A"
-GOLD_TXT = "#E0A800"
-ORANGE = "#FFA94D"
-VIOLETT = "#F2B8F5"
+# ---------------------------------------------------------------- Farben (Stil „bunt“)
+TINTE = "#1D2330"        # Konturen, Zahlen
+GRAU = "#5B6475"         # Unterzeile, Stichwort
+GRUEN = "#6FD58E"        # gesuchte Fläche (Füllung)
+GRUEN_TXT = "#1E8E4E"    # „?“ und Wort „Grün“ im Titel
+GELB = "#FFD45E"
+HELLGELB = "#FFF2C2"
+HELLBLAU = "#9CCFFF"
+BLAU_TXT = "#1F6FC4"
+ROT = "#FF8C82"
+ROT_TXT = "#E0473C"
+GOLD = "#FFC233"
+GOLD_TXT = "#C98600"
+ORANGE = "#FFB066"
+ORANGE_TXT = "#D9691A"
+VIOLETT = "#CDB2FF"
+VIOLETT_TXT = "#6E47D1"
+TUERKIS = "#79DBD2"
+TUERKIS_TXT = "#138A80"
+KORALLE = "#FF9E9E"
 WEISS = "#FFFFFF"
+MASS = "#E0473C"         # gegebene Längen (Maßlinien, Zahlen an Strecken)
+GESUCHT = "#1F6FC4"      # gesuchte Länge (z. B. „x“ an einer Maßlinie)
+
+# Kartengrund: zarte Pastelltöne mit passender Akzentfarbe (für Datum, Kopfzeile)
+HINTERGRUENDE = [("#EAF4FF", "#2F6FB8"), ("#FFF0E5", "#C8621C"), ("#EBF9EE", "#25884A"),
+                 ("#F4EEFF", "#6847C2"), ("#FFF7D9", "#A87A00"), ("#E6F8F6", "#14857B"),
+                 ("#FFEEF1", "#C2405A")]
+
+
+def _grund(nr, hintergrund):
+    if hintergrund:
+        return hintergrund if isinstance(hintergrund, tuple) else (hintergrund, TINTE)
+    return HINTERGRUENDE[(nr or 0) % len(HINTERGRUENDE)]
+
+
+def _tafel(fig, x0, y0, x1, y1):
+    """Weiße, abgerundete Tafel mit weichem Schatten (Figurkoordinaten 0..1)."""
+    from matplotlib.patches import FancyBboxPatch
+    w, h = x1 - x0, y1 - y0
+    for d, a in ((0.010, 0.05), (0.006, 0.07)):
+        fig.patches.append(FancyBboxPatch((x0 + d*0.4, y0 - d), w, h, boxstyle="round,pad=0,rounding_size=0.028",
+                                          transform=fig.transFigure, facecolor="#1D2330", alpha=a,
+                                          edgecolor="none", zorder=-10))
+    fig.patches.append(FancyBboxPatch((x0, y0), w, h, boxstyle="round,pad=0,rounding_size=0.028",
+                                      transform=fig.transFigure, facecolor=WEISS, edgecolor="none", zorder=-10))
+
 
 LW = 3.2                 # Linienstärke in pt (≈ 4,4 px)
 
@@ -65,51 +97,57 @@ DPI = 100
 
 # ---------------------------------------------------------------- Karte
 class Karte:
-    """Eine Karte mit Titel, optionaler Zeile, Figur, Stichwort, Datum/Nr. und Signatur."""
+    """Eine Karte: Titel auf farbigem Grund, Figur auf weißer Tafel, Stichwort,
+    Datum/Nr. senkrecht links, Signatur unten. hintergrund: Farbe oder (Farbe, Akzent);
+    ohne Angabe wechselt der Grund mit der Nummer."""
 
     def __init__(self, titel, zeile=None, stichwort=None, datum="", nr=None,
-                 sprache="de", signatur=None):
-        self.fig = plt.figure(figsize=(PX / DPI, PX / DPI), dpi=DPI, facecolor="white")
+                 sprache="de", signatur=None, hintergrund=None):
+        self.grund, self.akzent = _grund(nr, hintergrund)
+        self.fig = plt.figure(figsize=(PX / DPI, PX / DPI), dpi=DPI, facecolor=self.grund)
         self.titel = titel if isinstance(titel, list) else [(titel, TINTE)]
         self.zeile = zeile
         self.stichwort = stichwort
         self.datum = datum
         self.nr = nr
         self.signatur = signatur or ("#GeoRätsel" if sprache == "de" else "#GeoPuzzle")
-        # Figurbereich: oben Platz für Titel (+ Zeile), unten für Stichwort + Signatur
-        oben = 0.835 if zeile else 0.875
-        unten = 0.135 if stichwort else 0.095
-        self.ax = self.fig.add_axes([0.12, unten, 0.80, oben - unten])
+        tafel_oben = 0.83 if zeile else 0.865
+        tafel_unten = 0.07
+        _tafel(self.fig, 0.085, tafel_unten, 0.955, tafel_oben)
+        oben = tafel_oben - 0.03
+        unten = tafel_unten + (0.075 if stichwort else 0.03)
+        self.ax = self.fig.add_axes([0.13, unten, 0.78, oben - unten])
         self.ax.set_aspect("equal")
         self.ax.axis("off")
+        self.ax.patch.set_alpha(0)
 
     # -- Textteile
     def _titel_zeichnen(self):
         r = self.fig.canvas.get_renderer()
         teile, breiten = [], []
         for text, farbe in self.titel:
-            t = self.fig.text(0, 0.935, text, fontsize=46, fontweight="bold", color=farbe,
+            t = self.fig.text(0, 0.932, text, fontsize=46, fontweight="bold", color=farbe,
                               ha="left", va="center")
             teile.append(t)
             breiten.append(t.get_window_extent(r).width / PX)
-        x = 0.5 - sum(breiten) / 2
+        x = 0.52 - sum(breiten) / 2
         for t, b in zip(teile, breiten):
             t.set_x(x)
             x += b
         if self.zeile:
-            self.fig.text(0.5, 0.875, self.zeile, fontsize=23, color=GRAU,
+            self.fig.text(0.52, 0.868, self.zeile, fontsize=23, color=GRAU,
                           ha="center", va="center")
 
     def _rand_zeichnen(self):
         if self.datum or self.nr is not None:
             s = f"{self.datum}  #{self.nr}" if self.nr is not None else self.datum
-            self.fig.text(0.045, 0.5, s, fontsize=22, fontweight="bold", color=TINTE,
+            self.fig.text(0.043, 0.47, s, fontsize=22, fontweight="bold", color=self.akzent,
                           rotation=90, ha="center", va="center")
         if self.stichwort:
-            self.fig.text(0.5, 0.085, self.stichwort, fontsize=28, style="italic",
+            self.fig.text(0.52, 0.11, self.stichwort, fontsize=28, style="italic",
                           color=TINTE, ha="center", va="center")
-        self.fig.text(0.5, 0.035, self.signatur, fontsize=15, fontweight="bold",
-                      color=TINTE, ha="center", va="center")
+        self.fig.text(0.52, 0.035, self.signatur, fontsize=15, fontweight="bold",
+                      color=self.akzent, ha="center", va="center")
 
     def speichern(self, pfad, rand=0.04):
         """Figur einpassen (gleicher Maßstab in x und y) und PNG schreiben."""
@@ -123,7 +161,7 @@ class Karte:
         ax.set_anchor("C")
         self._titel_zeichnen()
         self._rand_zeichnen()
-        self.fig.savefig(pfad, dpi=DPI, facecolor="white")
+        self.fig.savefig(pfad, dpi=DPI, facecolor=self.grund)
         plt.close(self.fig)
         return pfad
 
@@ -131,13 +169,14 @@ class Karte:
 class Loesungskarte(Karte):
     """Lösungskarte (1100 px breit, Höhe passt sich dem Text an): Kopf „Lösung #Nr“,
     Antwort als Titel, große Figur mit Hilfslinien, darunter der Lösungsweg
-    (Liste von Absätzen, kurze Sätze)."""
+    (Liste von Absätzen, kurze Sätze) – alles auf einer weißen Tafel."""
 
-    FIG_OBEN, FIG_UNTEN = 165, 805          # Figurbereich in px von oben
+    FIG_OBEN, FIG_UNTEN = 175, 805          # Figurbereich in px von oben
 
     def __init__(self, antwort, schritte, datum="", nr=None, sprache="de", signatur=None,
-                 umbruch=62):
+                 umbruch=60, hintergrund=None):
         import textwrap
+        self.grund, self.akzent = _grund(nr, hintergrund)
         self.titel = antwort if isinstance(antwort, list) else [(antwort, TINTE)]
         kopf = "Lösung" if sprache == "de" else "Solution"
         self.zeile = f"{kopf} #{nr}" if nr is not None else kopf
@@ -151,12 +190,14 @@ class Loesungskarte(Karte):
         if self.zeilen:
             self.zeilen.pop()
         text_px = 36 * sum(z is not None for z in self.zeilen) + 16 * sum(z is None for z in self.zeilen)
-        self.H = max(PX, self.FIG_UNTEN + 40 + text_px + 95)
-        self.fig = plt.figure(figsize=(PX / DPI, self.H / DPI), dpi=DPI, facecolor="white")
+        self.H = max(PX, self.FIG_UNTEN + 40 + text_px + 110)
+        self.fig = plt.figure(figsize=(PX / DPI, self.H / DPI), dpi=DPI, facecolor=self.grund)
         f = self._f
-        self.ax = self.fig.add_axes([0.13, f(self.FIG_UNTEN), 0.74, f(self.FIG_OBEN) - f(self.FIG_UNTEN)])
+        _tafel(self.fig, 0.085, f(self.H - 72), 0.955, f(150))
+        self.ax = self.fig.add_axes([0.14, f(self.FIG_UNTEN), 0.74, f(self.FIG_OBEN) - f(self.FIG_UNTEN)])
         self.ax.set_aspect("equal")
         self.ax.axis("off")
+        self.ax.patch.set_alpha(0)
 
     def _f(self, y_px):
         return 1 - y_px / self.H
@@ -165,32 +206,32 @@ class Loesungskarte(Karte):
         r = self.fig.canvas.get_renderer()
         teile, breiten = [], []
         for text, farbe in self.titel:
-            t = self.fig.text(0, self._f(108), text, fontsize=44, fontweight="bold", color=farbe,
+            t = self.fig.text(0, self._f(100), text, fontsize=44, fontweight="bold", color=farbe,
                               ha="left", va="center")
             teile.append(t)
             breiten.append(t.get_window_extent(r).width / PX)
-        x = 0.5 - sum(breiten) / 2
+        x = 0.52 - sum(breiten) / 2
         for t, b in zip(teile, breiten):
             t.set_x(x)
             x += b
-        self.fig.text(0.5, self._f(42), self.zeile, fontsize=22, fontweight="bold", color=GRAU,
+        self.fig.text(0.52, self._f(40), self.zeile, fontsize=22, fontweight="bold", color=self.akzent,
                       ha="center", va="center")
 
     def _rand_zeichnen(self):
         f = self._f
         if self.datum or self.nr is not None:
             s = f"{self.datum}  #{self.nr}" if self.nr is not None else self.datum
-            self.fig.text(0.045, f((self.FIG_OBEN + self.FIG_UNTEN) / 2), s, fontsize=22,
-                          fontweight="bold", color=TINTE, rotation=90, ha="center", va="center")
+            self.fig.text(0.043, f((self.FIG_OBEN + self.FIG_UNTEN) / 2), s, fontsize=22,
+                          fontweight="bold", color=self.akzent, rotation=90, ha="center", va="center")
         y = self.FIG_UNTEN + 40
         for z in self.zeilen:
             if z is None:
                 y += 16
                 continue
-            self.fig.text(0.1, f(y), z, fontsize=21, color=TINTE, ha="left", va="top")
+            self.fig.text(0.13, f(y), z, fontsize=21, color=TINTE, ha="left", va="top")
             y += 36
-        self.fig.text(0.5, f(self.H - 38), self.signatur, fontsize=15, fontweight="bold",
-                      color=TINTE, ha="center", va="center")
+        self.fig.text(0.52, f(self.H - 36), self.signatur, fontsize=15, fontweight="bold",
+                      color=self.akzent, ha="center", va="center")
 
 
 def hilfslinie(ax, p, q, farbe="#1565C0", lw=2.4, z=5):
@@ -350,7 +391,7 @@ def zahl(ax, p, text, groesse=40, farbe=TINTE, fett=True, z=7):
             path_effects=[pe.withStroke(linewidth=0, foreground="none")])
 
 
-def an_strecke(ax, p, q, text, seite=1, abstand=3.5, groesse=26, farbe=TINTE, drehen=None):
+def an_strecke(ax, p, q, text, seite=1, abstand=3.5, groesse=26, farbe=MASS, drehen=None):
     """Längen-Beschriftung neben der Strecke pq (wie '15k'). seite=+1 links von p→q.
     Gedreht wird nur bei flachen Strecken (bis 60°), damit z. B. eine 6 nie wie eine 9 aussieht."""
     s = _massstab(ax) * abstand
@@ -370,19 +411,20 @@ def an_strecke(ax, p, q, text, seite=1, abstand=3.5, groesse=26, farbe=TINTE, dr
             rotation=w, rotation_mode="anchor", ha=ha, va="center", zorder=7)
 
 
-def masslinie(ax, p, q, text, abstand=6, seite=1, groesse=26):
-    """Maßlinie mit Hilfslinien an den echten Bezugspunkten p, q; Text mittig daneben."""
+def masslinie(ax, p, q, text, abstand=6, seite=1, groesse=26, farbe=MASS):
+    """Maßlinie mit Hilfslinien an den echten Bezugspunkten p, q; Text mittig daneben.
+    Gegebene Längen in MASS (korallenrot), gesuchte z. B. mit farbe=GESUCHT (blau)."""
     s = _massstab(ax)
     u = _einheit(p, q)
     n = np.array([-u[1], u[0]]) * seite
     a, b = _v(p) + n * s * abstand, _v(q) + n * s * abstand
     for x, y in ((p, a), (q, b)):
         e = _v(y) + n * s * 1.2
-        ax.plot([x[0] + n[0] * s, e[0]], [x[1] + n[1] * s, e[1]], color=TINTE, lw=1.4, zorder=4)
-    ax.annotate("", xy=a, xytext=b, arrowprops=dict(arrowstyle="<|-|>", color=TINTE, lw=1.6,
+        ax.plot([x[0] + n[0] * s, e[0]], [x[1] + n[1] * s, e[1]], color=farbe, lw=1.6, zorder=4)
+    ax.annotate("", xy=a, xytext=b, arrowprops=dict(arrowstyle="<|-|>", color=farbe, lw=1.8,
                                                     shrinkA=0, shrinkB=0, mutation_scale=18),
                 zorder=4)
-    an_strecke(ax, a, b, text, seite=seite, abstand=2.6, groesse=groesse)
+    an_strecke(ax, a, b, text, seite=seite, abstand=2.6, groesse=groesse, farbe=farbe)
 
 
 # ---------------------------------------------------------------- Kontaktbogen
