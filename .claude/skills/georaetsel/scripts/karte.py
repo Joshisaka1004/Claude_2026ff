@@ -128,6 +128,76 @@ class Karte:
         return pfad
 
 
+class Loesungskarte(Karte):
+    """Lösungskarte (1100 px breit, Höhe passt sich dem Text an): Kopf „Lösung #Nr“,
+    Antwort als Titel, große Figur mit Hilfslinien, darunter der Lösungsweg
+    (Liste von Absätzen, kurze Sätze)."""
+
+    FIG_OBEN, FIG_UNTEN = 165, 805          # Figurbereich in px von oben
+
+    def __init__(self, antwort, schritte, datum="", nr=None, sprache="de", signatur=None,
+                 umbruch=62):
+        import textwrap
+        self.titel = antwort if isinstance(antwort, list) else [(antwort, TINTE)]
+        kopf = "Lösung" if sprache == "de" else "Solution"
+        self.zeile = f"{kopf} #{nr}" if nr is not None else kopf
+        self.stichwort = None
+        self.datum, self.nr = datum, nr
+        self.signatur = signatur or ("#GeoRätsel" if sprache == "de" else "#GeoPuzzle")
+        self.zeilen = []
+        for absatz in schritte:
+            self.zeilen += textwrap.wrap(absatz, umbruch) or [""]
+            self.zeilen.append(None)
+        if self.zeilen:
+            self.zeilen.pop()
+        text_px = 36 * sum(z is not None for z in self.zeilen) + 16 * sum(z is None for z in self.zeilen)
+        self.H = max(PX, self.FIG_UNTEN + 40 + text_px + 95)
+        self.fig = plt.figure(figsize=(PX / DPI, self.H / DPI), dpi=DPI, facecolor="white")
+        f = self._f
+        self.ax = self.fig.add_axes([0.13, f(self.FIG_UNTEN), 0.74, f(self.FIG_OBEN) - f(self.FIG_UNTEN)])
+        self.ax.set_aspect("equal")
+        self.ax.axis("off")
+
+    def _f(self, y_px):
+        return 1 - y_px / self.H
+
+    def _titel_zeichnen(self):
+        r = self.fig.canvas.get_renderer()
+        teile, breiten = [], []
+        for text, farbe in self.titel:
+            t = self.fig.text(0, self._f(108), text, fontsize=44, fontweight="bold", color=farbe,
+                              ha="left", va="center")
+            teile.append(t)
+            breiten.append(t.get_window_extent(r).width / PX)
+        x = 0.5 - sum(breiten) / 2
+        for t, b in zip(teile, breiten):
+            t.set_x(x)
+            x += b
+        self.fig.text(0.5, self._f(42), self.zeile, fontsize=22, fontweight="bold", color=GRAU,
+                      ha="center", va="center")
+
+    def _rand_zeichnen(self):
+        f = self._f
+        if self.datum or self.nr is not None:
+            s = f"{self.datum}  #{self.nr}" if self.nr is not None else self.datum
+            self.fig.text(0.045, f((self.FIG_OBEN + self.FIG_UNTEN) / 2), s, fontsize=22,
+                          fontweight="bold", color=TINTE, rotation=90, ha="center", va="center")
+        y = self.FIG_UNTEN + 40
+        for z in self.zeilen:
+            if z is None:
+                y += 16
+                continue
+            self.fig.text(0.1, f(y), z, fontsize=21, color=TINTE, ha="left", va="top")
+            y += 36
+        self.fig.text(0.5, f(self.H - 38), self.signatur, fontsize=15, fontweight="bold",
+                      color=TINTE, ha="center", va="center")
+
+
+def hilfslinie(ax, p, q, farbe="#1565C0", lw=2.4, z=5):
+    """Gestrichelte Hilfslinie – nur auf Lösungskarten."""
+    ax.plot([p[0], q[0]], [p[1], q[1]], color=farbe, lw=lw, ls=(0, (5, 3)), zorder=z)
+
+
 # ---------------------------------------------------------------- Hilfen
 def _v(p):
     return np.asarray(p, dtype=float)
@@ -280,8 +350,9 @@ def zahl(ax, p, text, groesse=40, farbe=TINTE, fett=True, z=7):
             path_effects=[pe.withStroke(linewidth=0, foreground="none")])
 
 
-def an_strecke(ax, p, q, text, seite=1, abstand=3.5, groesse=26, farbe=TINTE):
-    """Längen-Beschriftung parallel neben der Strecke pq (wie '15k'). seite=+1 links von p→q."""
+def an_strecke(ax, p, q, text, seite=1, abstand=3.5, groesse=26, farbe=TINTE, drehen=None):
+    """Längen-Beschriftung neben der Strecke pq (wie '15k'). seite=+1 links von p→q.
+    Gedreht wird nur bei flachen Strecken (bis 60°), damit z. B. eine 6 nie wie eine 9 aussieht."""
     s = _massstab(ax) * abstand
     u = _einheit(p, q)
     n = np.array([-u[1], u[0]]) * seite
@@ -291,8 +362,12 @@ def an_strecke(ax, p, q, text, seite=1, abstand=3.5, groesse=26, farbe=TINTE):
         w -= 180
     if w < -90:
         w += 180
+    ha = "center"
+    if drehen is False or (drehen is None and abs(w) > 60):
+        w = 0
+        ha = "left" if n[0] > 0.5 else "right" if n[0] < -0.5 else "center"
     ax.text(m[0], m[1], text, fontsize=groesse, fontweight="bold", color=farbe,
-            rotation=w, rotation_mode="anchor", ha="center", va="center", zorder=7)
+            rotation=w, rotation_mode="anchor", ha=ha, va="center", zorder=7)
 
 
 def masslinie(ax, p, q, text, abstand=6, seite=1, groesse=26):
