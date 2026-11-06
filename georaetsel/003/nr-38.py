@@ -38,13 +38,12 @@ def pruefen():
 def figur(ax, loesung=False):
     P, (m1, R1), (m2, R2) = bau()
     from matplotlib.patches import Circle
-    flaeche(ax, [A, B, C], HELLGELB, kontur=False)
-    ax.add_patch(Circle(m1, R1, facecolor=TUERKIS, alpha=0.30, edgecolor="none", zorder=2))
-    ax.add_patch(Circle(m2, R2, facecolor=VIOLETT, alpha=0.35, edgecolor="none", zorder=2))
+    flaeche(ax, [A, B, C], GELB, kontur=False)
+    ax.add_patch(Circle(m1, R1, facecolor=TUERKIS, alpha=0.22, edgecolor="none", zorder=2))
+    ax.add_patch(Circle(m2, R2, facecolor=VIOLETT, alpha=0.25, edgecolor="none", zorder=2))
     kreis(ax, m1, R1, z=4); kreis(ax, m2, R2, z=4)
     zug(ax, [A, B, C])
-    kreis(ax, I, RI, lw=2.2, z=4)
-    for a_, b_ in ((A, B), (B, C), (C, A)): punkt(ax, fuss(I, a_, b_))
+    kreis(ax, I, RI, lw=2.6, farbe=WEISS, z=3)
     rechter_winkel(ax, C, A, B, groesse=3.5)
     masslinie(ax, C, A, "4", seite=-1, abstand=5)
     masslinie(ax, B, C, "3", seite=-1, abstand=27)
@@ -52,7 +51,7 @@ def figur(ax, loesung=False):
         e = (m[0] + rr*math.cos(math.radians(w)), m[1] + rr*math.sin(math.radians(w)))
         linie(ax, m, e, lw=2.2, farbe=GESUCHT, z=6); punkt(ax, m, "rot")
         zahl(ax, ((m[0]+e[0])/2 + 0.0, (m[1]+e[1])/2 + 0.22), t, farbe=GESUCHT, groesse=28)
-    punkt(ax, I, "rot"); punkt(ax, P)
+    punkt(ax, I, "rot"); punkt(ax, P); punkt(ax, A); punkt(ax, B)
     if loesung:
         T = fuss(I, A, B)
         kreis_r = RI

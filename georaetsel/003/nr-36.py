@@ -50,6 +50,7 @@ def figur(ax, loesung=False):
     for p, q in ((A, B), (B, C), (C, D), (D, A)): strich(ax, p, q)
     winkel(ax, A, B, D, "60°", r=9, groesse=20, text_abstand=1.7)
     punkt(ax, O, "rot")
+    linie(ax, O, P, lw=2.0); rechter_winkel(ax, P, O, X, groesse=2.6)
     for p in (P, X, Y): punkt(ax, p)
     if loesung:
         T1 = fuss(O, A, B); T2 = fuss(O, A, D)

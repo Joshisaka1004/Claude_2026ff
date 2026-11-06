@@ -48,7 +48,9 @@ def figur(ax, loesung=False):
     bereich(ax, gelb.intersection(blau), HELLBLAU, schraffur="/", schraffur_farbe=GOLD)
     kreis(ax, (0, 0), R)
     zug(ax, [A, B, C]); zug(ax, [B, X, Y, C]); linie(ax, P, B); linie(ax, P, C); linie(ax, P, A, lw=2.4)
-    strich(ax, P, A, t=0.3); strich(ax, P, X, t=0.72); strich(ax, P, Y, t=0.72)
+    strich(ax, P, A, t=0.14); strich(ax, P, X, t=0.72); strich(ax, P, Y, t=0.72)
+    strich(ax, A, B, 2, t=0.4); strich(ax, B, C, 2, t=0.22); strich(ax, C, A, 2, t=0.6)
+    zug(ax, [B, X, Y, C], lw=LW*1.25)
     for p in (A, B, C, P, X, Y): punkt(ax, p)
     if loesung:
         hilfslinie(ax, A, X)
