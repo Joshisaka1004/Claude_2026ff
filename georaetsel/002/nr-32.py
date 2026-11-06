@@ -19,7 +19,7 @@ SCHRITTE = {
            "The scale is 4 : 6 = 2 : 3 – the same for the radii. r : R = 2 : 3 (not 4 : 9!)."],
 }
 
-def bau(unten=9.0, oben=4.0, x1=0.8):
+def bau(unten=9.0, oben=4.0, x1=-0.6):
     m = math.sqrt(unten*oben)
     # unteres Teiltrapez: Grundseite unten (0,0)-(unten,0), oben Breite m bei Höhe H; Tangentenbedingung: Schenkel = unten + m
     d = unten - m

@@ -53,7 +53,7 @@ def figur(ax, loesung=False):
     zug(ax, [A, B, C, D]); linie(ax, D, P); linie(ax, A, F)
     rechter_winkel(ax, F, A, P, groesse=3)
     for p in (P, F): punkt(ax, p)
-    an_strecke(ax, A, F, "4", seite=-1, abstand=3, groesse=30)
+    masslinie(ax, A, F, "4", seite=1, abstand=5, groesse=30)
     masslinie(ax, D, P, "5", seite=1, abstand=5, groesse=30)
     if loesung:
         zahl(ax, ((A[0]+F[0]+D[0])/3, (A[1]+F[1]+D[1])/3), "4", groesse=28)

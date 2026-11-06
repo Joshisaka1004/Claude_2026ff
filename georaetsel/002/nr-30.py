@@ -4,19 +4,19 @@ from _basis import *
 from shapely.geometry import Polygon as SP
 
 NR, KURZ = 30, "zwoelfeck"
-TITEL = {"de": [("Gesamtfläche = ?", TINTE)], "en": [("Total area = ?", TINTE)]}
+TITEL = {"de": [("Fläche des Zwölfecks = ?", TINTE)], "en": [("Area of the dodecagon = ?", TINTE)]}
 ZEILE = {"de": None, "en": None}
 STICHWORT = {"de": "regelmäßiges Zwölfeck", "en": "regular dodecagon"}
-ANTWORT = {"de": [("Gesamtfläche = 12", TINTE)], "en": [("Total area = 12", TINTE)]}
+ANTWORT = {"de": [("Fläche = 12", TINTE)], "en": [("Area = 12", TINTE)]}
 SCHRITTE = {
     "de": ["Zerlege das Zwölfeck vom Mittelpunkt aus in 12 gleiche Dreiecke mit 30° an der Spitze. Jedes hat die Fläche R · (R/2) : 2 = R²/4.",
            "Die blaue Kappe besteht aus drei solchen Dreiecken minus dem Dreieck aus Mittelpunkt und den Enden der Sehne. Dieses hat an der Spitze 3 · 30° = 90°, also die Fläche R · R : 2 = R²/2.",
            "Kappe = 3 · R²/4 − R²/2 = R²/4 – genau so groß wie eines der 12 Dreiecke.",
-           "Gesamtfläche = 12 · 1 = 12."],
+           "Zwölfeck = 12 · 1 = 12."],
     "en": ["Cut the dodecagon from the centre into 12 equal triangles with 30° at the tip. Each has area R · (R/2) : 2 = R²/4.",
            "The blue cap is three such triangles minus the triangle made of the centre and the ends of the chord. That one has 3 · 30° = 90° at the tip, so its area is R · R : 2 = R²/2.",
            "Cap = 3 · R²/4 − R²/2 = R²/4 – exactly as big as one of the 12 triangles.",
-           "Total area = 12 · 1 = 12."],
+           "Dodecagon = 12 · 1 = 12."],
 }
 
 def bau(R=2.0):

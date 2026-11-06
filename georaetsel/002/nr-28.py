@@ -56,11 +56,13 @@ def figur(ax, loesung=False):
     t = ((0-X[0])*dx + (0-X[1])*dy) / L2
     Tb = (X[0] + t*dx, X[1] + t*dy)
     punkt(ax, Tb)
-    an_strecke(ax, V, X, "8", seite=1, abstand=5, groesse=30, drehen=False)
-    an_strecke(ax, Y, V, "7", seite=1, abstand=5, groesse=30, drehen=False)
-    an_strecke(ax, E[3], E[2], "x", seite=-1, abstand=4.5, groesse=30)
+    masslinie(ax, V, X, "8", seite=1, abstand=4, groesse=28)
+    masslinie(ax, Y, V, "7", seite=1, abstand=4, groesse=28)
+    for k in range(6):
+        p, q = E[k], E[(k + 1) % 6]
+        punkt(ax, ((p[0] + q[0])/2, (p[1] + q[1])/2))
+    masslinie(ax, E[2], E[3], "x", seite=-1, abstand=4, groesse=30)
     linie(ax, E[2], E[3], farbe=ROT_TXT, lw=LW*1.6)
     if loesung:
         M1 = ((V[0]+E[5][0])/2, (V[1]+E[5][1])/2); M2 = ((V[0]+E[1][0])/2, (V[1]+E[1][1])/2)
-        for m in (M1, M2): punkt(ax, m)
         hilfslinie(ax, (0, 0), M1); hilfslinie(ax, (0, 0), M2); hilfslinie(ax, (0, 0), Tb)

@@ -4,7 +4,7 @@ from _basis import *
 from _geo import fuss, inkreis, flaeche as fl, abst
 
 NR, KURZ = 29, "drei-inkreise"
-TITEL = {"de": [("Fläche des Dreiecks = ?", TINTE)], "en": [("Area of the triangle = ?", TINTE)]}
+TITEL = {"de": [("Fläche des großen Dreiecks = ?", TINTE)], "en": [("Area of the large triangle = ?", TINTE)]}
 ZEILE = {"de": None, "en": None}
 STICHWORT = {"de": None, "en": None}
 ANTWORT = {"de": [("Fläche = 150", TINTE)], "en": [("Area = 150", TINTE)]}
@@ -51,7 +51,10 @@ def figur(ax, loesung=False):
     (m1, r1), (m2, r2) = inkreis(A, C, H), inkreis(C, B, H)
     kreis(ax, m1, r1, farbe=HELLBLAU); kreis(ax, m2, r2, farbe=HELLBLAU)
     zug(ax, [A, B, C]); linie(ax, C, H)
-    rechter_winkel(ax, C, B, A, groesse=3); rechter_winkel(ax, H, C, B, groesse=3)
+    rechter_winkel(ax, C, B, A, groesse=4.5); rechter_winkel(ax, H, C, B, groesse=3.5)
+    for (m, rr), seiten in ((inkreis(A, C, H), ((A, C), (C, H), (H, A))), (inkreis(C, B, H), ((C, B), (B, H), (H, C)))):
+        for a, b in seiten:
+            punkt(ax, fuss(m, a, b))
     for m, r, t in ((m1, r1, "3"), (m2, r2, "4")):
         f = fuss(m, A, B)
         linie(ax, m, f, lw=2.2); punkt(ax, m, "rot")

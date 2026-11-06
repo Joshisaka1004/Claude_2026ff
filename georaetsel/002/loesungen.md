@@ -9,16 +9,16 @@ Erstellt mit `/georaetsel`. Jede Karte gibt es als Aufgabe und als Lösung, auf 
 
 ## Übersicht
 
-| Nr. | Titel | Aha | Was ist neu? | Bekanntheit | Lösung | Stufe |
+| Nr. | Titel | Aha | Was ist neu? | Bekanntheit | Lösung | Stufe (geplant / Kaltlöser) |
 |---|---|---|---|---|---|---|
-| 27 | Gelb = ? | Die Spitze wandert parallel zur Diagonale – P darf man in die Ecke schieben | Quadrat über AP an ein Quadrat angesetzt, gefragt ist das Dreieck ACQ | c | 16 | schwer |
-| 28 | x = ? | Umfang des abgeschnittenen Dreiecks = Seite; dritte Seite aus 120° | Sechseck statt Quadrat/Viertelkreis, versteckte 7-8-13-Kombination | b | 28 | schwer |
-| 29 | Fläche des Dreiecks = ? | Pythagoras gilt auch für die Inkreisradien, dann 3-4-5-Form | Gefragt ist die Fläche, zwei Ähnlichkeitsschritte | b | 150 | schwer |
-| 30 | Gesamtfläche = ? | Die Kappe über drei Seiten ist genau ein Zwölftel | Klassiker „Zwölfeck = 3R²“ umgedreht | b | 12 | schwer |
-| 31 | Grün = ? | Dreieck ADP = halbes Quadrat, also AF · DP = Seite² | Viereck statt Dreieck gefragt – zusätzliche Schritte | b | 11 | schwer |
-| 32 | r : R = ? | Streckung vom Schnittpunkt der Schenkel: Mittellinie = √(4 · 9) = 6 | Zwei gestapelte Inkreise; Falle 4 : 9 | b | 2 : 3 | schwer |
-| 33 | Fläche des Trapezes = ? | r² = Produkt der Schenkelstücke (Höhensatz), zweimal | Schiefes Trapez, nur Berührstücke gegeben | b | 168 | schwer |
-| 34 | Grün = ? | Kreis durch die Berührpunkte = Inkreis des Mittelpunktsdreiecks | Gefragt ist der Kreis, nicht das Dreieck der Berührpunkte | b | 9π ≈ 28,3 | schwer |
+| 27 | Gelb = ? | Die Spitze wandert parallel zur Diagonale – P darf man in die Ecke schieben | Quadrat über AP an ein Quadrat angesetzt, gefragt ist das Dreieck ACQ | c | 16 | schwer / mittel |
+| 28 | x = ? | Umfang des abgeschnittenen Dreiecks = Seite; dritte Seite aus 120° | Sechseck statt Quadrat/Viertelkreis, versteckte 7-8-13-Kombination | b | 28 | schwer / mittel–schwer |
+| 29 | Fläche des großen Dreiecks = ? | Pythagoras gilt auch für die Inkreisradien, dann 3-4-5-Form | Gefragt ist die Fläche, zwei Ähnlichkeitsschritte | b | 150 | schwer / mittel |
+| 30 | Fläche des Zwölfecks = ? | Die Kappe über drei Seiten ist genau ein Zwölftel | Klassiker „Zwölfeck = 3R²“ umgedreht | b | 12 | schwer / mittel |
+| 31 | Grün = ? | Dreieck ADP = halbes Quadrat, also AF · DP = Seite² | Viereck statt Dreieck gefragt – zusätzliche Schritte | b | 11 | schwer / mittel |
+| 32 | r : R = ? | Streckung vom Schnittpunkt der Schenkel: Mittellinie = √(4 · 9) = 6 | Zwei gestapelte Inkreise; Falle 4 : 9 | b | 2 : 3 | schwer / mittel |
+| 33 | Fläche des Trapezes = ? | r² = Produkt der Schenkelstücke (Höhensatz), zweimal | Schiefes Trapez, nur Berührstücke gegeben | b | 168 | schwer / mittel–schwer |
+| 34 | Grün = ? | Kreis durch die Berührpunkte = Inkreis des Mittelpunktsdreiecks | Gefragt ist der Kreis, nicht das Dreieck der Berührpunkte | b | 9π ≈ 28,3 | schwer / mittel |
 
 Bekanntheit: b = verwandte Aufgabe bekannt, aber hier ist ein zusätzlicher Gedanke nötig; c = als Rätselkarte unbekannt.
 
@@ -30,7 +30,7 @@ Bekanntheit: b = verwandte Aufgabe bekannt, aber hier ist ein zusätzlicher Geda
 
 **#29 Fläche = 150.** Die zwei Teildreiecke und das ganze Dreieck haben dieselbe Form; ihre Inkreisradien verhalten sich wie die langen Seiten. Darum gilt Pythagoras auch für die Radien: 3² + 4² = 5². Das Dreieck hat die Form 3-4-5 (Inkreisradius 1) und ist 5-mal so groß: 15, 20, 25. Fläche 150.
 
-**#30 Gesamtfläche = 12.** Das Zwölfeck besteht aus 12 Mittelpunktsdreiecken mit je R²/4. Die Kappe ist drei solche Dreiecke minus das rechtwinklige Dreieck aus Mittelpunkt und Sehnenenden (R²/2): 3 · R²/4 − R²/2 = R²/4. Die Kappe ist also ein Zwölftel: Gesamtfläche 12.
+**#30 Fläche = 12.** Das Zwölfeck besteht aus 12 Mittelpunktsdreiecken mit je R²/4. Die Kappe ist drei solche Dreiecke minus das rechtwinklige Dreieck aus Mittelpunkt und Sehnenenden (R²/2): 3 · R²/4 − R²/2 = R²/4. Die Kappe ist also ein Zwölftel: Gesamtfläche 12.
 
 **#31 Grün = 11.** Das Dreieck aus linker Seite und Punkt rechts ist ein halbes Quadrat und hat die Fläche 5 · 4 : 2 = 10. Also ist das Quadrat 20. Links fehlt Grün das Dreieck 4 · 2 : 2 = 4 (Pythagoras), oben rechts das Dreieck √20 · √5 : 2 = 5. Grün = 20 − 4 − 5 = 11.
 
@@ -43,3 +43,5 @@ Bekanntheit: b = verwandte Aufgabe bekannt, aber hier ist ein zusätzlicher Geda
 ## Prüfungen
 - Jede Lösung mit 10–40 zufälligen Figuren nachgerechnet (`nr-XX.py`, Funktion `pruefen`), Eindeutigkeit geprüft.
 - Ideen: 20 Kandidaten (4 aus dieser Sitzung, 16 vom Ideengeber). Die Bekanntheitsprüfung hat 12 als Standardrätsel aussortiert, darunter auch eine eigene Idee („Pizza-Satz“ im gleichseitigen Dreieck).
+- Kaltlösen (Opus): alle 8 Karten nur aus dem Bild richtig gelöst, keine mehrdeutig. Er stuft die meisten als „mittel“ ein und hält #29, #31, #32 und #33 für eher bekannte Motive (die Bekanntheitsprüfung hatte sie als „verwandt, aber mit neuem Gedanken“ eingestuft).
+- Kaltlesen (Sonnet) und zweiter Durchgang: Maßlinien für 7, 8 und x (#28), 4 und 5 (#31), 4, 9, 3 (#33); alle Berührpunkte markiert (#28, #29); grüner Kreis als ganze Scheibe obenauf und Zeile „Der grüne Kreis geht durch die drei Berührpunkte.“ (#34); getrennte Berührpunkte an der Mittellinie (#32); Titel „Fläche des großen Dreiecks“ (#29) und „Fläche des Zwölfecks“ (#30).

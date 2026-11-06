@@ -5,7 +5,7 @@ from _geo import abst, inkreis
 
 NR, KURZ = 34, "drei-kreise"
 TITEL = {"de": [("Grün", GRUEN_TXT), (" = ?", TINTE)], "en": [("Green", GRUEN_TXT), (" = ?", TINTE)]}
-ZEILE = {"de": None, "en": None}
+ZEILE = {"de": "Der grüne Kreis geht durch die drei Berührpunkte.", "en": "The green circle passes through the three touching points."}
 STICHWORT = {"de": None, "en": None}
 ANTWORT = {"de": [("Grün", GRUEN_TXT), (" = 9π ≈ 28,3", TINTE)], "en": [("Green", GRUEN_TXT), (" = 9π ≈ 28.3", TINTE)]}
 SCHRITTE = {
@@ -53,9 +53,7 @@ def figur(ax, loesung=False):
     m, r = umkreis(*T)
     for o, rr in ((O1, R1), (O2, R2), (O3, R3)):
         kreis(ax, o, rr, farbe=HELLBLAU)
-    kreis(ax, m, r, farbe=GRUEN, z=4)
-    for o, rr in ((O1, R1), (O2, R2), (O3, R3)):
-        kreis(ax, o, rr, z=5)
+    kreis(ax, m, r, farbe=GRUEN, z=5)
     for p in T: punkt(ax, p)
     for o, rr, ziel, t in ((O1, R1, (-12.0, 0.0), "6"), (O2, R2, (12.0, 0.0), "6"), (O3, R3, (0.0, 12.0), "4")):
         linie(ax, o, ziel, lw=2.2, z=6); punkt(ax, o, "rot")
