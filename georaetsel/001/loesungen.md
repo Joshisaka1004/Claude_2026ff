@@ -1,4 +1,4 @@
-# Klassische Georätsel – Serie vom 06.11.2026 (#19–#26)
+# Klassische Georätsel – Serie 001 (06.11.2026, #19–#26)
 
 Erstellt mit `/georaetsel`. Jede Karte gibt es als Aufgabe und als Lösung, jeweils auf Deutsch und Englisch, im Ordner `png/`.
 `nr-XX.py` rechnet die Lösung mit zufällig veränderten Figuren nach und zeichnet die Karten; `python3 render.py` erzeugt alle PNGs neu.

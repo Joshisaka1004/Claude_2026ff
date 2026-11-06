@@ -107,7 +107,7 @@ Pro Idee in der Tabelle eine Spalte **„Was ist neu?“**: ein Satz, was diese 
 
 ### 3.1 Vorbereitung
 - Projektgedächtnis lesen (Rätselkarten: Stil, Signatur, Serien, nächste Nummer).
-- Alle bisherigen Serien suchen und jede `loesungen.md` lesen: `/mnt/project-files/aufgaben-*/`, `/mnt/project-files/georaetsel-*/` und im Repo `georaetsel/*/` (was davon existiert). Daraus die Liste benutzter Motive bilden. Kein Motiv wiederholen.
+- Alle bisherigen Serien suchen und jede `loesungen.md` lesen: `/mnt/project-files/aufgaben-*/`, `/mnt/project-files/georaetsel-*/` und im Repo `georaetsel/*/` bzw. `/mnt/project-files/georaetsel/*/` (was davon existiert). Daraus die Liste benutzter Motive bilden. Kein Motiv wiederholen.
 - Nummer: höchste bisher benutzte Nummer + 1 (gemeinsame Zählung mit /ahaaufgaben). Datum = heute, Format `TT.MM.JJJJ`.
 - Den Skill `raetselgrafik-pruefung` laden und befolgen. Wo er Text verlangt, gilt hier zuerst: **eine Marke in der Figur statt eines Satzes**. Nur was sich nicht zeichnen lässt, kommt als eine kurze Zeile dazu.
 
@@ -139,7 +139,7 @@ Für jede Karte ein kleines Skript `nr-XX.py` (wird mit ausgeliefert):
 - Marken (Striche, Pfeile, Winkel) erst nach den Umrissen zeichnen – ihre Größe richtet sich nach der Figur.
 - Zahlen mittig in ihre Fläche, nie auf eine Linie; gesuchte Fläche mit „?“ in `GRUEN_TXT`.
 - Zu jeder Aufgabe eine **Lösungskarte** (`Loesungskarte` im Baukasten): Antwort als Titel, dieselbe Figur mit gestrichelten Hilfslinien und Farben, die den Trick zeigen, darunter der Lösungsweg in 3–5 kurzen Sätzen (Trick zuerst).
-- Nur die gewählten Sprachen rendern. Dateinamen: `XX-kurzname-aufgabe-de.png`, `XX-kurzname-loesung-de.png` (EN entsprechend), Ordner `png/`. Ein `render.py` rendert alles auf einmal (Vorlage: `georaetsel/2026-11-06/render.py` im Repo).
+- Nur die gewählten Sprachen rendern. Dateinamen: `XX-kurzname-aufgabe-de.png`, `XX-kurzname-loesung-de.png` (EN entsprechend), Ordner `png/`. Ein `render.py` rendert alles auf einmal (Vorlage: `georaetsel/001/render.py` im Repo).
 - Kontaktbogen aller Karten bauen und ansehen, dann jede Karte in voller Größe. Mängel sofort beheben.
 
 ### 3.6 Prüfen (Pflicht)
@@ -149,10 +149,12 @@ Kaltleser und Kaltlöser laufen mit den in Abschnitt 0 gewählten Modellen, para
 3. Korrigieren, neu rendern, ansehen; zweiter Durchgang nur für Befunde hoch/mittel.
 
 ### 3.7 Ausliefern
-- Ordner: `/mnt/project-files/georaetsel-JJJJ-MM-TT/`, falls `/mnt/project-files` existiert; sonst im Repo `georaetsel/JJJJ-MM-TT/` (bei zweiter Serie am selben Tag Suffix b, c …). Inhalt: alle PNGs, alle `nr-XX.py`, `loesungen.md`, ZIP mit allem.
+- **Jeder Auftrag bekommt einen eigenen, fortlaufend nummerierten Ordner** mit drei Ziffern: `georaetsel/001/`, `georaetsel/002/` … Gibt es noch keinen, ist es `001`; ist `005` der höchste, kommt `006`. Lücken nicht auffüllen, bestehende Ordner nie überschreiben. Anlegen mit `python3 <skill>/scripts/naechster_ordner.py <repo>/georaetsel` (gibt den neuen Pfad aus; den Basisordner immer angeben). Den Ordner gleich zu Beginn der Arbeit anlegen (nach der Abfrage), damit Skripte und Bilder von Anfang an dort liegen.
+- Ort: im Repo `georaetsel/NNN/`. Gibt es kein Repo, aber `/mnt/project-files`, dann `/mnt/project-files/georaetsel/NNN/` (Skript mit diesem Basisordner aufrufen).
+- Inhalt: `png/` mit allen Aufgaben- und Lösungskarten, alle `nr-XX.py`, `render.py`, `loesungen.md` (oben Datum und Kartennummern der Serie), ZIP mit allem.
 - `loesungen.md`: gewählte Einstellungen (Anzahl, Stufen, Sprachen, Modelle je Rolle), Tabelle Nr. · Titel · Aha · Was ist neu? · Bekanntheit (b/c) · Lösung · Stufe, danach pro Karte der kurze Lösungsweg in leichter Sprache (3–6 Sätze, der Trick zuerst), zuletzt die Prüfbefunde und was geändert wurde.
 - Im Repo: committen und auf den vorgegebenen Branch pushen.
-- Galerie-Artifact veröffentlichen: Karten als JPG neben der Seite, Schalter Deutsch/English, unter jeder Karte die eingeklappte Lösungskarte (Vorlage: Galerie der Serie 2026-11-06). Bei nur einer Sprache entfällt der Schalter. Jochen öffnet die Galerie auf dem iPad – sie ist der Hauptweg (ZIPs gehen dort nicht).
+- Galerie-Artifact veröffentlichen: Karten als JPG neben der Seite, Schalter Deutsch/English, unter jeder Karte die eingeklappte Lösungskarte (Vorlage: Galerie der Serie 001). Bei nur einer Sprache entfällt der Schalter. Jochen öffnet die Galerie auf dem iPad – sie ist der Hauptweg (ZIPs gehen dort nicht).
 - Antwort: Galerie-Link zuerst, dann 2–3 Sätze zu den schönsten Aha-Momenten, Lösungsblatt und ZIP anhängen (höchstens 6 Anhänge).
 - Projektgedächtnis ergänzen: Serie, Ordner, Galerie-Link, neue Motive, nächste Nummer.
 
