@@ -45,5 +45,3 @@ def figur(ax, loesung=False):
         an_strecke(ax, (0, 0), V, "R", seite=1, abstand=3, drehen=False)
         winkel(ax, V, (0, 0), (0, -r), "30°", r=16, groesse=17, text_abstand=1.75)
         punkt(ax, (0, 0), "rot")
-    else:
-        zahl(ax, (0, 0.05), "?", farbe=GRUEN_TXT, groesse=48)

@@ -5,7 +5,7 @@ from _basis import *
 NR, KURZ = 25, "viertelkreis"
 TITEL = {"de": [("Grün", GRUEN_TXT), (" = ?", TINTE)], "en": [("Green", GRUEN_TXT), (" = ?", TINTE)]}
 ZEILE = {"de": None, "en": None}
-STICHWORT = {"de": "Viertelkreis", "en": "quarter circle"}
+STICHWORT = {"de": "Viertelkreis und Rechteck", "en": "quarter circle and rectangle"}
 ANTWORT = {"de": [("Grün", GRUEN_TXT), (" = 12", TINTE)], "en": [("Green", GRUEN_TXT), (" = 12", TINTE)]}
 SCHRITTE = {
     "de": ["Die Diagonale vom Mittelpunkt zur Ecke auf dem Bogen ist ein Radius r.",

@@ -17,7 +17,7 @@ SCHRITTE = {
            "Take the yellow and orange triangles away: top left the rectangle 6 is left, bottom right green is left.",
            "Equal minus equal is equal: green = 6."],
 }
-W, H, T = 6.25, 4.0, 0.4
+W, H, T = 7.5, 5.0, 0.2
 
 def pruefen():
     for _ in range(40):

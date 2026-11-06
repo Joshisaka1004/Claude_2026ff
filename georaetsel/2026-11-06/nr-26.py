@@ -45,7 +45,7 @@ def figur(ax, loesung=False):
     linie(ax, (0, 0), (ab, 0)); linie(ax, (ac, 0), D)
     rechter_winkel(ax, (ac, 0), D, (ab, 0), groesse=3)
     for p in ((0, 0), (ac, 0), (ab, 0), D): punkt(ax, p)
-    an_strecke(ax, (ac, 0), D, "6", seite=-1, abstand=3, groesse=30)
+    an_strecke(ax, (ac, 0), D, "6", seite=1, abstand=2.5, groesse=30)
     if loesung:
         hilfslinie(ax, (0, 0), D); hilfslinie(ax, D, (ab, 0))
         rechter_winkel(ax, D, (0, 0), (ab, 0), groesse=3)
@@ -53,4 +53,4 @@ def figur(ax, loesung=False):
         from matplotlib.patches import Circle
         ax.add_patch(Circle(m, 3.0, facecolor="none", edgecolor="#1565C0", lw=2.4, ls=(0, (5, 3)), zorder=5))
     else:
-        zahl(ax, (2.0, 3.35), "?", farbe=GRUEN_TXT, groesse=48)
+        zahl(ax, (6.5, 5.25), "?", farbe=GRUEN_TXT, groesse=48)

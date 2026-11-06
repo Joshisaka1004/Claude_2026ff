@@ -32,7 +32,6 @@ def pruefen():
     return "x = 30° für 20 zufällige Quadratgrößen"
 
 def figur(ax, loesung=False):
-    flaeche(ax, [D, C, E], HELLBLAU, kontur=False)
     zug(ax, [A, B, C, D]); zug(ax, [D, C, E]); linie(ax, E, A); linie(ax, E, B)
     for p, q in ((A, B), (B, C), (C, D), (D, A), (D, E), (C, E)):
         strich(ax, p, q)

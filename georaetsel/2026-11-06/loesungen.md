@@ -12,7 +12,7 @@ Erstellt mit `/georaetsel`. Jede Karte gibt es als Aufgabe und als Lösung, jewe
 | 23 | Grün = ? | Dreieck mit zwei Linien zu Seitenmitten | dritte Linie ergänzen: sechs gleich große Dreiecke | 8 | mittel |
 | 24 | Grün = ? | regelmäßiges Achteck | Zerlegen: das Mittelrechteck ist das halbe Achteck | 14 | mittel |
 | 25 | Grün = ? | Viertelkreis mit Rechteck | die Rechteck-Diagonale ist ein Radius | 12 | mittel |
-| 26 | Grün = ? | drei Halbkreise | nur die Strecke 6 zählt: Grün = Kreis über dieser Strecke | 9π ≈ 28,3 | schwer |
+| 26 | Grün gesamt = ? | drei Halbkreise | nur die Strecke 6 zählt: Grün = Kreis über dieser Strecke | 9π ≈ 28,3 | schwer |
 
 ## Lösungswege in leichter Sprache
 
@@ -35,4 +35,5 @@ Erstellt mit `/georaetsel`. Jede Karte gibt es als Aufgabe und als Lösung, jewe
 ## Prüfungen
 - Jede Lösung mit 10–40 zufälligen Figuren nachgerechnet (`nr-XX.py`, Funktion `pruefen`).
 - Redundanz: Jede Karte hat nur die nötigen Angaben (eine Zahl bzw. zwei Längen bei #25).
-- Kaltlesen und Kaltlösen durch frische Prüfer ohne Lösungskenntnis (siehe unten).
+- Kaltlösen: Ein frischer Prüfer hat alle 8 Karten nur aus dem Bild richtig gelöst. Befund: Bei #26 war unklar, ob die ganze grüne Fläche gemeint ist → Titel „Grün gesamt = ?“. Bei #25 war der Mittelpunkt nicht markiert → roter Punkt.
+- Kaltlesen (DE + EN): „?“ aus dem Verhältnis-Kreis #21 entfernt; Zusatzzeile bei #23 gestrichen (einheitlich mit den anderen Karten), Stichwort „Dreieck“; #25 Stichwort „Viertelkreis und Rechteck“; #22 ohne bedeutungslose Farbfüllung; #20 blaues Feld länglicher (sah wie ein Quadrat aus); #26 Zahl 6 freigestellt.

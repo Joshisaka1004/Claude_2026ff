@@ -5,8 +5,8 @@ from shapely.geometry import Polygon as SP
 
 NR, KURZ = 23, "seitenmitten"
 TITEL = {"de": [("Grün", GRUEN_TXT), (" = ?", TINTE)], "en": [("Green", GRUEN_TXT), (" = ?", TINTE)]}
-ZEILE = {"de": "Die Zahl ist eine Fläche.", "en": "The number is an area."}
-STICHWORT = {"de": None, "en": None}
+ZEILE = {"de": None, "en": None}
+STICHWORT = {"de": "Dreieck", "en": "triangle"}
 ANTWORT = {"de": [("Grün", GRUEN_TXT), (" = 8", TINTE)], "en": [("Green", GRUEN_TXT), (" = 8", TINTE)]}
 SCHRITTE = {
     "de": ["Zeichne die dritte Linie: von der oberen Ecke durch den Schnittpunkt zur Mitte der unteren Seite.",
