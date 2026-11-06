@@ -32,7 +32,7 @@ def figur(ax, loesung=False):
     linie(ax, (0, 0), (R, 0)); linie(ax, (0, 0), (0, R)); bogen(ax, (0, 0), R, 0, 90)
     zug(ax, [(0, 0), (3, 0), (3, 4), (0, 4)])
     rechter_winkel(ax, (0, 0), (1, 0), (0, 1), groesse=3.5)
-    punkt(ax, (3, 4)); punkt(ax, (3, 0)); punkt(ax, (0, 4)); punkt(ax, (R, 0)); punkt(ax, (0, R))
+    punkt(ax, (0, 0), "rot"); punkt(ax, (3, 4)); punkt(ax, (3, 0)); punkt(ax, (0, 4)); punkt(ax, (R, 0)); punkt(ax, (0, R))
     masslinie(ax, (3, 0), (R, 0), "2", seite=-1, abstand=6)
     masslinie(ax, (0, 4), (0, R), "1", seite=1, abstand=6)
     if loesung:

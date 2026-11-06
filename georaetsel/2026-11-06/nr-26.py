@@ -4,17 +4,17 @@ from _basis import *
 from shapely.geometry import box
 
 NR, KURZ = 26, "drei-halbkreise"
-TITEL = {"de": [("Grün", GRUEN_TXT), (" = ?", TINTE)], "en": [("Green", GRUEN_TXT), (" = ?", TINTE)]}
+TITEL = {"de": [("Grün gesamt", GRUEN_TXT), (" = ?", TINTE)], "en": [("Total green", GRUEN_TXT), (" = ?", TINTE)]}
 ZEILE = {"de": None, "en": None}
 STICHWORT = {"de": "drei Halbkreise", "en": "three semicircles"}
-ANTWORT = {"de": [("Grün", GRUEN_TXT), (" = 9π ≈ 28,3", TINTE)], "en": [("Green", GRUEN_TXT), (" = 9π ≈ 28.3", TINTE)]}
+ANTWORT = {"de": [("Grün gesamt", GRUEN_TXT), (" = 9π ≈ 28,3", TINTE)], "en": [("Total green", GRUEN_TXT), (" = 9π ≈ 28.3", TINTE)]}
 SCHRITTE = {
     "de": ["Nenne die kleinen Radien a und b. Der große Radius ist a + b.",
-           "Grün = halber großer Kreis minus zwei halbe kleine Kreise = π/2 · ((a + b)² − a² − b²) = π · a · b.",
+           "Grün (beide Teile) = halber großer Kreis minus zwei halbe kleine Kreise = π/2 · ((a + b)² − a² − b²) = π · a · b.",
            "Der Winkel oben an der Spitze der gestrichelten Linien ist ein rechter (Thales). Dafür gilt: 6² = 2a · 2b, also a · b = 9.",
            "Grün = 9π – genau so groß wie der gestrichelte Kreis über der Strecke 6. Wo die Strecke steht, ist egal."],
     "en": ["Call the small radii a and b. The big radius is a + b.",
-           "Green = half big circle minus two half small circles = π/2 · ((a + b)² − a² − b²) = π · a · b.",
+           "Green (both parts) = half big circle minus two half small circles = π/2 · ((a + b)² − a² − b²) = π · a · b.",
            "The angle at the top of the dashed lines is a right angle (Thales). So 6² = 2a · 2b, which gives a · b = 9.",
            "Green = 9π – exactly the dashed circle on the segment 6. Where the segment stands does not matter."],
 }
