@@ -76,6 +76,17 @@ Jedes Geometrie-Rätsel beruht auf bekannten Sätzen – das ist in Ordnung. Abe
 - Rechteck aus zwei gegenüberliegenden Seiten im regelmäßigen Achteck (= halbes Achteck)
 - Viviani (Summe der Abstände im gleichseitigen Dreieck), Pizza-Satz
 - vier gleiche Kreise im Quadrat mit kleinem Quadrat in der Mitte
+- Neuneck: längste minus kürzeste Diagonale = Seite
+- Bottema (Quadrate auf zwei Dreiecksseiten, Mittelpunkt unabhängig von C); Gamows Schatzinsel
+- Feuerbachkreis / Kreis durch Seitenmitten und Höhenfußpunkt
+- 45°-Winkel im Quadrat (Umfang 2s, Diagonalschnitte, Flächenhälfte)
+- Sehnenviereck mit senkrechten Diagonalen (a² + c² = 4R²)
+- Lot auf die Winkelhalbierende, Abstand zur Seitenmitte = (b − c)/2
+- Archimedes' gebrochene Sehne; Abstand der Berührpunkte von Inkreis und Ankreis = |b − c|
+- Viereck mit AB = AD und rechten Winkeln bei A und C (Fläche AC²/2)
+- „Pizza“ im gleichseitigen Dreieck (Punkt mit Loten und Ecken verbunden, abwechselnde Teile gleich)
+- Viertelkreis im Quadrat mit Tangente (Umfang des Eckdreiecks = 2s)
+- gleichschenkliges Tangententrapez (h = √(ab))
 - alle Motive aus `referenz/` und aus früheren Serien (siehe 3.1)
 Die Liste nach jeder Serie um neu entdeckte Standardmotive ergänzen.
 
