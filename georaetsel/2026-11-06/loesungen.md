@@ -37,3 +37,4 @@ Erstellt mit `/georaetsel`. Jede Karte gibt es als Aufgabe und als Lösung, jewe
 - Redundanz: Jede Karte hat nur die nötigen Angaben (eine Zahl bzw. zwei Längen bei #25).
 - Kaltlösen: Ein frischer Prüfer hat alle 8 Karten nur aus dem Bild richtig gelöst. Befund: Bei #26 war unklar, ob die ganze grüne Fläche gemeint ist → Titel „Grün gesamt = ?“. Bei #25 war der Mittelpunkt nicht markiert → roter Punkt.
 - Kaltlesen (DE + EN): „?“ aus dem Verhältnis-Kreis #21 entfernt; Zusatzzeile bei #23 gestrichen (einheitlich mit den anderen Karten), Stichwort „Dreieck“; #25 Stichwort „Viertelkreis und Rechteck“; #22 ohne bedeutungslose Farbfüllung; #20 blaues Feld länglicher (sah wie ein Quadrat aus); #26 Zahl 6 freigestellt.
+- Zweiter Kaltlese-Durchgang: alle Karten ok bis auf #26 → Länge 6 jetzt als Maßlinie (nicht als Flächenzahl lesbar), „?“ nur im Titel, weil Grün aus zwei Teilen besteht.
