@@ -12,12 +12,12 @@ STICHWORT = {"de": "gleichseitiges Dreieck", "en": "equilateral triangle"}
 ANTWORT = {"de": [("Gelb", GOLD_TXT), (" : ", TINTE), ("Blau", BLAU_TXT), (" = 1 : 1", TINTE)],
            "en": [("Yellow", GOLD_TXT), (" : ", TINTE), ("Blue", BLAU_TXT), (" = 1 : 1", TINTE)]}
 SCHRITTE = {
-    "de": ["Der Winkel APB ist 60° (Umfangswinkel über AB). Mit PA = PX ist das Dreieck APX also gleichseitig.",
+    "de": ["Der graue Bogen um P zeigt: PX = PA = PY. Der Winkel APB ist 60° (Umfangswinkel über AB). Mit PA = PX ist das Dreieck APX also gleichseitig.",
            "Dreht man um A um 60°, wandert C auf B und P auf X. Darum ist BX = PC. Genauso ist CY = PB, also PA = PB + PC.",
            "Gelb = Dreieck PXY − Dreieck PBC. Beide haben bei P den Winkel 120°. Ein solches Dreieck mit den Seiten u und v hat die Fläche √3/4 · u · v.",
            "Gelb = √3/4 · ((PB + PC)² − PB · PC) = √3/4 · (PB² + PB · PC + PC²) = √3/4 · BC² (Kosinussatz mit 120°) – genau die Fläche von Blau.",
            "Gelb : Blau = 1 : 1, egal wo P auf dem Bogen liegt."],
-    "en": ["Angle APB is 60° (inscribed angle on AB). With PA = PX, triangle APX is equilateral.",
+    "en": ["The grey arc around P shows: PX = PA = PY. Angle APB is 60° (inscribed angle on AB). With PA = PX, triangle APX is equilateral.",
            "Turn by 60° around A: C goes to B and P goes to X. So BX = PC. In the same way CY = PB, so PA = PB + PC.",
            "Yellow = triangle PXY − triangle PBC. Both have a 120° angle at P. Such a triangle with sides u and v has area √3/4 · u · v.",
            "Yellow = √3/4 · ((PB + PC)² − PB · PC) = √3/4 · (PB² + PB · PC + PC²) = √3/4 · BC² (cosine rule with 120°) – exactly the area of blue.",
@@ -47,11 +47,15 @@ def figur(ax, loesung=False):
     bereich(ax, blau.difference(gelb), HELLBLAU)
     bereich(ax, gelb.intersection(blau), HELLBLAU, schraffur="/", schraffur_farbe=GOLD)
     kreis(ax, (0, 0), R)
-    zug(ax, [A, B, C]); zug(ax, [B, X, Y, C]); linie(ax, P, B); linie(ax, P, C); linie(ax, P, A, lw=2.4)
-    strich(ax, P, A, t=0.14); strich(ax, P, X, t=0.72); strich(ax, P, Y, t=0.72)
+    zug(ax, [A, B, C]); zug(ax, [B, X, Y, C]); linie(ax, P, X); linie(ax, P, Y); linie(ax, P, A, lw=2.4)
+    # Zirkelbogen um P durch X, A, Y: zeigt PX = PA = PY
+    wx = math.degrees(math.atan2(X[1]-P[1], X[0]-P[0])); wy = math.degrees(math.atan2(Y[1]-P[1], Y[0]-P[0]))
+    from matplotlib.patches import Arc
+    pa = abst(P, A)
+    ax.add_patch(Arc(P, 2*pa, 2*pa, theta1=wy - 4, theta2=wx + 4, edgecolor=GRAU, lw=1.8, zorder=5))
     strich(ax, A, B, 2, t=0.4); strich(ax, B, C, 2, t=0.22); strich(ax, C, A, 2, t=0.6)
-    zug(ax, [B, X, Y, C], lw=LW*1.25)
-    for p in (A, B, C, P, X, Y): punkt(ax, p)
+    for p in (A, B, C, X, Y): punkt(ax, p)
+    punkt(ax, P, "rot")
     if loesung:
         hilfslinie(ax, A, X)
         winkel(ax, P, Y, X, "120°", r=6, groesse=17, text_abstand=1.9)

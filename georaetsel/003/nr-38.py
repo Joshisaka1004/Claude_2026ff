@@ -24,7 +24,7 @@ SCHRITTE = {
 C, A, B = (0.0, 0.0), (4.0, 0.0), (0.0, 3.0)
 I, RI = inkreis(A, B, C)
 
-def bau(t=0.8):
+def bau(t=0.89):
     P = (A[0] + t*(B[0]-A[0]), A[1] + t*(B[1]-A[1]))
     return P, umkreis(A, I, P), umkreis(B, I, P)
 
@@ -45,8 +45,8 @@ def figur(ax, loesung=False):
     zug(ax, [A, B, C])
     kreis(ax, I, RI, lw=2.6, farbe=WEISS, z=3)
     rechter_winkel(ax, C, A, B, groesse=3.5)
-    masslinie(ax, C, A, "4", seite=-1, abstand=5)
-    masslinie(ax, B, C, "3", seite=-1, abstand=27)
+    masslinie(ax, C, A, "4", seite=-1, abstand=7)
+    masslinie(ax, B, C, "3", seite=-1, abstand=42)
     for m, rr, w, t in ((m1, R1, -25, "R"), (m2, R2, 160, "r")):
         e = (m[0] + rr*math.cos(math.radians(w)), m[1] + rr*math.sin(math.radians(w)))
         linie(ax, m, e, lw=2.2, farbe=GESUCHT, z=6); punkt(ax, m, "rot")
@@ -62,4 +62,4 @@ def figur(ax, loesung=False):
                              (I, "I", -0.25, 0.12), (P, "P", 0.28, 0.12), (T, "T", 0.22, 0.25)):
             buchstabe(ax, p, s, dx, dy)
     else:
-        buchstabe(ax, I, "I", -0.25, 0.12)
+        buchstabe(ax, I, "I", 0.28, 0.32, groesse=26)

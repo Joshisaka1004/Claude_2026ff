@@ -37,3 +37,7 @@ Aussortiert: zwei Kandidaten, weil die Prüfer sie als Standardrätsel oder Lemm
 ## Prüfungen
 - Jede Lösung mit 40–200 zufälligen Figuren nachgerechnet (`nr-XX.py`, Funktion `pruefen`).
 - Ideen: 24 eigene Figuren durchsucht (3 Funde), dazu 8 Ideen vom Ideengeber (7 davon aus der Invariantensuche).
+- Kaltlösen (Opus): alle 4 Karten nur aus dem Bild richtig gelöst. Keine wirkt wie eine Kopie; „erinnert an“ Vecten-Figuren (#35), das Tangenten-Lemma in der Raute (#36), van Schooten (#37), das Trillium-Lemma (#38) – mit eigenem Dreh. Stufen: schwer, mittel, schwer, schwer.
+- Befund Kaltlösen #38: In der ersten Zeichnung lag P zufällig so, dass der kleine Kreis auch durch die rechtwinklige Ecke ging – irreführend. P neu gesetzt (per Suche ohne Zufallszusammenhänge). #37: Gleichheits-Striche auf PX waren mehrdeutig → ersetzt durch einen grauen Zirkelbogen um den roten Punkt P.
+- Kaltlesen (Sonnet) und zweiter Durchgang: Halbkreis ohne gelbliche Füllung (#35, „Gelb“ eindeutig), Rechte-Winkel-Marken an den Quadraten, Radius mit rechtem Winkel zum Berührpunkt (#36), Doppelstriche für das gleichseitige Dreieck und Mittelpunkt des Bogens markiert (#37), ruhigere Farben, Ecken markiert und Maßlinien (#38).
+- Nebenbei entdeckt: Bei #37 geht die Linie XY für jede Lage von P durch den Kreismittelpunkt – kein Zufall der Zeichnung, sondern eine echte Eigenschaft.

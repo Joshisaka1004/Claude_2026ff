@@ -116,6 +116,7 @@ Vorher die Vorlagen in `referenz/` ansehen und `referenz/stil.md` lesen. Die Vor
 - Quadrat und Kreis auf einer Geraden, Abstand x (beispiel-16)
 - Quadrat mit vier Viertelkreisen und Quadrat in der Mitte (beispiel-19)
 - Rechteck mit Inkreis-Paaren der Teildreiecke (r1² + r2² = r²), Tangententrapez mit r² = Produkt der Schenkelstücke, gestapelte Inkreise im Trapez, Kreis durch die Berührpunkte dreier Kreise, Quadrat mit Lot auf DP (AF · DP = s²) – Serie 002
+- Quadrate über den Seiten eines Thales-Dreiecks mit Dreieck zum Bogenscheitel; Raute mit Inkreis-Tangente (Dreieck zur Gegenecke); van-Schooten-Verlängerung mit Viereck = Dreieck; Kreise durch Inkreismittelpunkt und Punkt auf der Hypotenuse – Serie 003
 - alle Motive aus `referenz/` und aus früheren Serien (siehe 3.1)
 Die Liste nach jeder Serie um neu entdeckte Standardmotive ergänzen.
 
